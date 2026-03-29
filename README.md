@@ -82,6 +82,9 @@ Harness components organized by the problem they solve, not by vendor.
 ### Context Delivery & Compaction
 
 - [Harness Engineering](https://openai.com/index/harness-engineering/) — How to structure context windows for agents: what to include, what to exclude, and how context shape affects agent behavior.
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic's systematic guide to managing the full context state—system prompts, tools, MCP, and message history—as a finite, curated resource. Reframes harness design as "what configuration of context produces the desired behavior?" rather than just prompt wording.
+- [Compaction — Claude API Docs](https://platform.claude.com/docs/en/build-with-claude/compaction) — Anthropic's reference for server-side context compaction: automatically summarizes older context when approaching the window limit. Reduced token consumption by 84% in a 100-turn web search eval while allowing agents to complete workflows that would otherwise hit context limits.
+- [LLMLingua](https://github.com/microsoft/LLMLingua) — Microsoft Research's prompt compression toolkit (up to 20x compression, minimal performance loss) that can be embedded as a preprocessing step in the context delivery layer. LLMLingua-2 adds 3–6x speed gains, making it viable for latency-sensitive agent loops. ![Stars](https://img.shields.io/github/stars/microsoft/LLMLingua?style=flat-square&label=★&color=yellow)
 
 ### Tool Design
 
@@ -90,6 +93,8 @@ Harness components organized by the problem they solve, not by vendor.
 ### Skills & MCP
 
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction) — Anthropic's open protocol for connecting agents to external tools, data sources, and services in a standardized way.
+- [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) — Anthropic's official reference MCP server implementations (GitHub, Slack, Postgres, Puppeteer, etc.). The authoritative source for understanding correct MCP server structure before building your own. ![Stars](https://img.shields.io/github/stars/modelcontextprotocol/servers?style=flat-square&label=★&color=yellow)
+- [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) — Browser automation via accessibility tree snapshots rather than screenshots, dramatically reducing token cost. The canonical example of structured tool output design in an MCP server. ![Stars](https://img.shields.io/github/stars/microsoft/playwright-mcp?style=flat-square&label=★&color=yellow)
 
 ### Permissions & Authorization
 
@@ -98,10 +103,14 @@ Harness components organized by the problem they solve, not by vendor.
 ### Memory & State
 
 - [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) — Covers in-context, external, and procedural memory patterns as harness-level concerns.
+- [Letta (MemGPT)](https://github.com/letta-ai/letta) — The reference architecture for stateful agents: three-tier memory (core / archival / recall) maps directly to harness state management design. Their [agent loop redesign post](https://www.letta.com/blog/letta-v1-agent) is the most thorough public analysis of how memory structure shapes the harness. ![Stars](https://img.shields.io/github/stars/letta-ai/letta?style=flat-square&label=★&color=yellow)
+- [mem0](https://github.com/mem0ai/mem0) — Drop-in universal memory layer (YC-backed, AWS Agent SDK's exclusive memory provider) that handles cross-session retention without custom harness-level state management code. Lowest integration cost for production-grade persistent memory. ![Stars](https://img.shields.io/github/stars/mem0ai/mem0?style=flat-square&label=★&color=yellow)
 
 ### Task Runners & Orchestration
 
 - [Harness Engineering](https://openai.com/index/harness-engineering/) — How task runners fit into the harness: queueing, parallelism, and progress reporting.
+- [LangGraph](https://github.com/langchain-ai/langgraph) — Graph-based state machine framework for multi-agent harnesses: models supervisor/subagent topologies, error-recovery branches, and checkpoint persistence as first-class primitives. The most widely adopted harness orchestration layer in production. ![Stars](https://img.shields.io/github/stars/langchain-ai/langgraph?style=flat-square&label=★&color=yellow)
+- [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) — Lightweight multi-agent framework built around handoffs and guardrails; the production successor to Swarm. Complements LangGraph for harnesses where delegation patterns are simpler than full graph orchestration. ![Stars](https://img.shields.io/github/stars/openai/openai-agents-python?style=flat-square&label=★&color=yellow)
 
 ### Verification & CI Integration
 
@@ -137,6 +146,8 @@ Real repositories worth studying — each with a note on *why* it's worth your t
 - [Beyond Permission Prompts](https://www.anthropic.com/engineering/beyond-permission-prompts) — The authoritative resource on moving from prompt-level permission grants to structured authorization in the harness.
 - [Model Context Protocol — Authorization](https://modelcontextprotocol.io/specification/2025-11-05/basic/authorization) — MCP's specification for OAuth-based authorization flows when agents access external services.
 - [AI Harness Scorecard](https://github.com/anthropics/ai-harness-scorecard) — Scores repositories on AI harness safeguards. Useful checklist for auditing your own harness's security posture.
+- [E2B](https://github.com/e2b-dev/E2B) — Firecracker microVM sandboxes purpose-built for agent tool loops: ~150ms cold start, Python/JS SDKs, open source. The clearest reference implementation of "code execution as a harness primitive" rather than a CI system bolted on. ![Stars](https://img.shields.io/github/stars/e2b-dev/E2B?style=flat-square&label=★&color=yellow)
+- [tldrsec/prompt-injection-defenses](https://github.com/tldrsec/prompt-injection-defenses) — The most complete catalog of practical prompt injection defenses (input validation, tool output sanitization, canary tokens, etc.). Functions as a design checklist for hardening trust boundaries in any agent harness. ![Stars](https://img.shields.io/github/stars/tldrsec/prompt-injection-defenses?style=flat-square&label=★&color=yellow)
 
 ---
 
@@ -144,6 +155,8 @@ Real repositories worth studying — each with a note on *why* it's worth your t
 
 - [Demystifying Evals for AI Agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — Anthropic's comprehensive guide to agent evaluation: trajectory evals, outcome evals, and how to build eval harnesses that are themselves reliable.
 - [SWE-bench](https://www.swebench.com) — The canonical benchmark for coding agents. Essential reference for understanding what "verified working" means for harness outputs.
+- [Inspect AI](https://github.com/UKGovernmentBEIS/inspect_ai) — UK AI Security Institute's eval framework with native support for evaluating external agents (Claude Code, Codex CLI) as black-box targets, plus built-in bash/python/web browsing tools. Built for safety-grade rigor; the right foundation for harness-level eval infrastructure. ![Stars](https://img.shields.io/github/stars/UKGovernmentBEIS/inspect_ai?style=flat-square&label=★&color=yellow)
+- [tau-bench](https://github.com/sierra-research/tau-bench) — Benchmarks agent behavior in three-way user-tool-policy interactions — the failure mode SWE-bench doesn't cover. Useful for validating that a harness correctly enforces business rules across multi-turn, stateful conversations. ![Stars](https://img.shields.io/github/stars/sierra-research/tau-bench?style=flat-square&label=★&color=yellow)
 
 ---
 
