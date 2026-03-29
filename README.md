@@ -82,6 +82,8 @@ Harness components organized by the problem they solve, not by vendor.
 
 - [Run Long-Horizon Tasks with Codex](https://developers.openai.com/blog/run-long-horizon-tasks-with-codex/) — Introduces milestone-based planning artifacts (Plan.md, Implement.md) as harness-level state.
 - [Harness Design for Long-Running Application Development](https://www.anthropic.com/engineering/harness-design-long-running-apps) — Multi-session planning, progress tracking, and the role of persistent planning documents.
+- [Plan-and-Execute Agents](https://blog.langchain.com/plan-and-execute-agents/) — The canonical engineering write-up separating planning from execution as distinct harness layers: a planner LLM generates the step list once; an executor agent works through it, replanning only when needed. Defines the pattern that most modern task-decomposition harnesses follow.
+- [microsoft/TaskWeaver](https://github.com/microsoft/TaskWeaver) — Code-first task decomposition framework with a planner/executor split and a plugin system for injecting domain knowledge into the planning layer. The most complete reference implementation of plan-then-execute with stateful task tracking. ![Stars](https://img.shields.io/github/stars/microsoft/TaskWeaver?style=flat-square&label=★&color=yellow)
 
 ### Context Delivery & Compaction
 
@@ -89,22 +91,27 @@ Harness components organized by the problem they solve, not by vendor.
 - [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic's systematic guide to managing the full context state—system prompts, tools, MCP, and message history—as a finite, curated resource. Reframes harness design as "what configuration of context produces the desired behavior?" rather than just prompt wording.
 - [Compaction — Claude API Docs](https://platform.claude.com/docs/en/build-with-claude/compaction) — Anthropic's reference for server-side context compaction: automatically summarizes older context when approaching the window limit. Reduced token consumption by 84% in a 100-turn web search eval while allowing agents to complete workflows that would otherwise hit context limits.
 - [LLMLingua](https://github.com/microsoft/LLMLingua) — Microsoft Research's prompt compression toolkit (up to 20x compression, minimal performance loss) that can be embedded as a preprocessing step in the context delivery layer. LLMLingua-2 adds 3–6x speed gains, making it viable for latency-sensitive agent loops. ![Stars](https://img.shields.io/github/stars/microsoft/LLMLingua?style=flat-square&label=★&color=yellow)
+- [Prompt Caching — Claude API Docs](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) — The most effective harness-level cost lever: cache repeated system prompts, tool definitions, and long documents across requests. Explains where to place `cache_control` breakpoints for maximum reuse across multi-turn agent sessions.
 
 ### Tool Design
 
 - [Writing Effective Tools for Agents](https://www.anthropic.com/engineering/writing-effective-tools-for-agents) — Tool naming, schema design, error messages, and return value conventions that make agents more reliable.
 - [Tool Use — Claude API Docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) — Authoritative reference for client vs. server tool execution models, strict schema enforcement, and tool_result error signaling. The distinction between client-side and server-side tool execution is a foundational harness architecture decision.
 - [Function Calling — OpenAI Docs](https://platform.openai.com/docs/guides/function-calling) — Defines the de facto industry-standard JSON Schema conventions for tool definitions and parallel function calling. Essential reading before designing a tool interface that needs to work across multiple models.
+- [outlines](https://github.com/dottxt-ai/outlines) — Constrains token sampling via regex/CFG/JSON Schema at the decoding layer, guaranteeing structured output without model fine-tuning. The right solution when you need OpenAI Structured Outputs-equivalent reliability from a locally deployed or open-weight model. ![Stars](https://img.shields.io/github/stars/dottxt-ai/outlines?style=flat-square&label=★&color=yellow)
+- [instructor](https://python.useinstructor.com/) — Maps Pydantic models directly to structured LLM extraction with built-in retry and validation-error feedback loops. Turns tool call output parsing from ad-hoc JSON handling into type-safe data models, eliminating an entire class of harness parsing bugs. ![Stars](https://img.shields.io/github/stars/instructor-ai/instructor?style=flat-square&label=★&color=yellow)
 
 ### Skills & MCP
 
 - [Model Context Protocol](https://modelcontextprotocol.io/introduction) — Anthropic's open protocol for connecting agents to external tools, data sources, and services in a standardized way.
 - [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) — Anthropic's official reference MCP server implementations (GitHub, Slack, Postgres, Puppeteer, etc.). The authoritative source for understanding correct MCP server structure before building your own. ![Stars](https://img.shields.io/github/stars/modelcontextprotocol/servers?style=flat-square&label=★&color=yellow)
 - [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) — Browser automation via accessibility tree snapshots rather than screenshots, dramatically reducing token cost. The canonical example of structured tool output design in an MCP server. ![Stars](https://img.shields.io/github/stars/microsoft/playwright-mcp?style=flat-square&label=★&color=yellow)
+- [A2A Protocol](https://github.com/a2aproject/A2A) — Google's open Agent-to-Agent protocol: JSON-RPC over HTTP(S)/SSE with Agent Card service discovery and a task/message/artifact communication model. The emerging standard for cross-framework agent interoperability in multi-agent harnesses. ![Stars](https://img.shields.io/github/stars/a2aproject/A2A?style=flat-square&label=★&color=yellow)
 
 ### Permissions & Authorization
 
 - [Beyond Permission Prompts](https://www.anthropic.com/engineering/beyond-permission-prompts) — Structured authorization patterns for agents: how to give agents the right permissions without relying on prompt-level trust.
+- [OWASP LLM06:2025 — Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/) — OWASP's authoritative definition of the "excessive agency" risk: over-provisioned functions, unnecessary permissions, and missing approval mechanisms. The standard checklist for auditing harness permission scope against principle of least privilege.
 
 ### Memory & State
 
@@ -135,6 +142,7 @@ Harness components organized by the problem they solve, not by vendor.
 ### Human-in-the-Loop
 
 - [LangGraph — Human-in-the-Loop Concepts](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/) — Systematic treatment of interrupt, breakpoint, and approve patterns: how to pause an agent mid-loop, persist state, and resume after human review. Directly addresses the harness engineering challenge of inserting human gates into long-running workflows.
+- [AutoGen — Human-in-the-Loop](https://microsoft.github.io/autogen/0.2/docs/tutorial/human-in-the-loop/) — Explains `human_input_mode` (NEVER / TERMINATE / ALWAYS) and the UserProxyAgent as an approval gate. The most concrete implementation reference for adding human review nodes to a multi-agent conversation harness.
 
 ---
 
@@ -156,6 +164,7 @@ Real repositories worth studying — each with a note on *why* it's worth your t
 - [coleam00/your-claude-engineer](https://github.com/coleam00/your-claude-engineer) — Agent harness with Slack, GitHub, and Linear integrations. Useful reference for how real-world tool wiring works inside a harness. ![Stars](https://img.shields.io/github/stars/coleam00/your-claude-engineer?style=flat-square&label=★&color=yellow)
 - [OpenHands](https://github.com/OpenHands/OpenHands) — The most architecturally complete open-source coding agent: Runtime/Sandbox isolation, EventStream message bus, and Agent Controller are a three-layer harness design worth studying for production deployments. ![Stars](https://img.shields.io/github/stars/OpenHands/OpenHands?style=flat-square&label=★&color=yellow)
 - [browser-use](https://github.com/browser-use/browser-use) — Minimal browser-automation agent harness with clean separation of tool registration, DOM state injection, action loop, and error recovery. Small codebase, clear structure — the best "minimal viable harness" reference for understanding core loop mechanics. ![Stars](https://img.shields.io/github/stars/browser-use/browser-use?style=flat-square&label=★&color=yellow)
+- [SWE-agent](https://github.com/SWE-agent/SWE-agent) — Coding agent whose Agent-Computer Interface (ACI) — purpose-built file viewer, search, and editor tools with explicit state constraints and error feedback — is the reference design for adapting a tool interface to a specific task domain rather than using generic bash. ![Stars](https://img.shields.io/github/stars/SWE-agent/SWE-agent?style=flat-square&label=★&color=yellow)
 
 ### Adjacent Collections
 
@@ -201,7 +210,9 @@ Lists that cover adjacent territory — overlapping but not identical scope.
 
 - [Awesome Context Engineering](https://github.com/Meirtz/Awesome-Context-Engineering) — Comprehensive survey on context engineering: prompt engineering, RAG, context window management, production AI systems.
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) — Curated resources, tools, and workflows specifically for Claude Code users.
-- [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers) — Comprehensive list of MCP servers for extending agents with external capabilities.
+- [awesome-mcp-servers](https://github.com/appcypher/awesome-mcp-servers) — Comprehensive list of MCP servers for extending agents with external capabilities. ![Stars](https://img.shields.io/github/stars/appcypher/awesome-mcp-servers?style=flat-square&label=★&color=yellow)
+- [awesome-ai-agents](https://github.com/e2b-dev/awesome-ai-agents) — Curated list of AI agents and agent frameworks, organized by use case. Useful for surveying the landscape of what harnesses are being built around. ![Stars](https://img.shields.io/github/stars/e2b-dev/awesome-ai-agents?style=flat-square&label=★&color=yellow)
+- [awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps) — Collection of production LLM applications with source code across RAG, multi-agent, and tool-use patterns. Good reference for how harness primitives combine in real applications. ![Stars](https://img.shields.io/github/stars/Shubhamsaboo/awesome-llm-apps?style=flat-square&label=★&color=yellow)
 
 ---
 
