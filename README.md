@@ -5,6 +5,17 @@
     <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC0-lightgrey.svg" alt="License: CC0"></a>
   </p>
+  <p>
+    <a href="https://zdoc.ai/de/ai-boost/awesome-harness-engineering">Deutsch</a> |
+    <a href="https://zdoc.ai/en/ai-boost/awesome-harness-engineering">English</a> |
+    <a href="https://zdoc.ai/es/ai-boost/awesome-harness-engineering">Español</a> |
+    <a href="https://zdoc.ai/fr/ai-boost/awesome-harness-engineering">Français</a> |
+    <a href="https://zdoc.ai/ja/ai-boost/awesome-harness-engineering">日本語</a> |
+    <a href="https://zdoc.ai/ko/ai-boost/awesome-harness-engineering">한국어</a> |
+    <a href="https://zdoc.ai/pt/ai-boost/awesome-harness-engineering">Português</a> |
+    <a href="https://zdoc.ai/ru/ai-boost/awesome-harness-engineering">Русский</a> |
+    <a href="https://zdoc.ai/zh/ai-boost/awesome-harness-engineering">中文</a>
+  </p>
 </div>
 
 **Harness engineering** is the discipline of designing the scaffolding — context delivery, tool interfaces, planning artifacts, verification loops, memory systems, and sandboxes — that surrounds an AI agent and determines whether it succeeds or fails on real tasks.
@@ -91,20 +102,20 @@ Real repositories worth studying — each with a note on *why* it's worth your t
 
 ### Tutorials & Educational
 
-- [shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code) — Step-by-step deconstruction of Claude Code as an agent harness (s01–s12). Best resource for understanding how agent loop, tool use, skills, context compaction, and task management compose in practice. ★42k
-- [AutoJunjie/awesome-agent-harness](https://github.com/AutoJunjie/awesome-agent-harness) — Curated list organized into Full Lifecycle Platforms, Task Runners, Agent Runtimes, Coding Agents. Close to this list's scope; good complementary reference. ★189
+- [shareAI-lab/learn-claude-code](https://github.com/shareAI-lab/learn-claude-code) — Step-by-step deconstruction of Claude Code as an agent harness (s01–s12). Best resource for understanding how agent loop, tool use, skills, context compaction, and task management compose in practice. ![Stars](https://img.shields.io/github/stars/shareAI-lab/learn-claude-code?style=flat-square&label=★&color=yellow)
+- [AutoJunjie/awesome-agent-harness](https://github.com/AutoJunjie/awesome-agent-harness) — Curated list organized into Full Lifecycle Platforms, Task Runners, Agent Runtimes, Coding Agents. Close to this list's scope; good complementary reference. ![Stars](https://img.shields.io/github/stars/AutoJunjie/awesome-agent-harness?style=flat-square&label=★&color=yellow)
 
 ### Generators & Meta-Harnesses
 
-- [revfactory/harness](https://github.com/revfactory/harness) — A meta-skill that generates domain-specific agent teams and the skills they use. Good example of harness-as-code, where the harness itself is produced by an agent. ★238
+- [revfactory/harness](https://github.com/revfactory/harness) — A meta-skill that generates domain-specific agent teams and the skills they use. Good example of harness-as-code, where the harness itself is produced by an agent. ![Stars](https://img.shields.io/github/stars/revfactory/harness?style=flat-square&label=★&color=yellow)
 
 ### Demo Harnesses
 
-- [coleam00/your-claude-engineer](https://github.com/coleam00/your-claude-engineer) — Agent harness with Slack, GitHub, and Linear integrations. Useful reference for how real-world tool wiring works inside a harness. ★112
+- [coleam00/your-claude-engineer](https://github.com/coleam00/your-claude-engineer) — Agent harness with Slack, GitHub, and Linear integrations. Useful reference for how real-world tool wiring works inside a harness. ![Stars](https://img.shields.io/github/stars/coleam00/your-claude-engineer?style=flat-square&label=★&color=yellow)
 
 ### Adjacent Collections
 
-- [jiji262/awesome-harness-engineering](https://github.com/jiji262/awesome-harness-engineering) — Focuses on platform delivery governance, IDP, GitOps, and AI-native engineering. Overlaps with this list on the platform engineering side; more Harness-the-company oriented. ★11
+- [jiji262/awesome-harness-engineering](https://github.com/jiji262/awesome-harness-engineering) — Focuses on platform delivery governance, IDP, GitOps, and AI-native engineering. Overlaps with this list on the platform engineering side; more Harness-the-company oriented. ![Stars](https://img.shields.io/github/stars/jiji262/awesome-harness-engineering?style=flat-square&label=★&color=yellow)
 
 ---
 
