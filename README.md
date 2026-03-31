@@ -200,6 +200,7 @@ Real repositories worth studying — each with a note on *why* it's worth your t
 
 - [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) — Anthropic's official SDK that exposes Claude Code's entire harness as a programmable API: built-in tool execution loop, `PreToolUse`/`PostToolUse` hooks for interception, subagent definitions, `allowedTools` permission control, and session resumption. The highest-leverage starting point for building a production harness — you inherit the entire tool execution layer rather than implementing it. ![Stars](https://img.shields.io/github/stars/anthropics/claude-agent-sdk-python?style=flat-square&label=★&color=yellow)
 - [revfactory/harness](https://github.com/revfactory/harness) — A meta-skill that generates domain-specific agent teams and the skills they use. Good example of harness-as-code, where the harness itself is produced by an agent. ![Stars](https://img.shields.io/github/stars/revfactory/harness?style=flat-square&label=★&color=yellow)
+- [Meta-Harness: End-to-End Optimization of Model Harnesses](https://arxiv.org/abs/2603.28052) — Treats the entire harness (system prompt, tool definitions, context management, completion logic) as a joint optimization target rather than hand-tuning each piece. The key insight: give the proposer agent filesystem access to all prior harness candidates, scores, and execution traces — 10M-token diagnostic context vs. the 26K in prior work — so it can trace failures back to specific harness decisions.
 
 ### Demo Harnesses
 
