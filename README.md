@@ -5,6 +5,10 @@
   <p>
     <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC0-lightgrey.svg" alt="License: CC0"></a>
+    <a href="https://github.com/ai-boost/awesome-harness-engineering/stargazers"><img src="https://img.shields.io/github/stars/ai-boost/awesome-harness-engineering?style=social" alt="GitHub Stars"></a>
+    <a href="https://github.com/ai-boost/awesome-harness-engineering/network/members"><img src="https://img.shields.io/github/forks/ai-boost/awesome-harness-engineering?style=social" alt="GitHub Forks"></a>
+    <a href="https://github.com/ai-boost/awesome-harness-engineering/commits/main"><img src="https://img.shields.io/github/last-commit/ai-boost/awesome-harness-engineering" alt="Last Commit"></a>
+    <a href="https://linux.do"><img src="https://img.shields.io/badge/Join-linux.do-orange" alt="linux.do"></a>
   </p>
   <p>
     <a href="https://zdoc.app/de/ai-boost/awesome-harness-engineering">Deutsch</a> |
@@ -345,3 +349,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## License
 
 [CC0](LICENSE) — public domain dedication.
+
+---
+
+## Acknowledgments
+
+Thanks to [linux.do](https://linux.do) — a vibrant tech community where many harness engineering ideas were discussed and refined.
